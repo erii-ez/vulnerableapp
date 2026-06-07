@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using VulnerableApp.Models;
+
 namespace VulnerableApp.Data
 {
     public class AppDbContext : DbContext

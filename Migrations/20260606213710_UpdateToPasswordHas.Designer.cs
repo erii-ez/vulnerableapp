@@ -12,8 +12,8 @@ using VulnerableApp.Data;
 namespace VulnerableApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260602181523_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260606213710_UpdateToPasswordHas")]
+    partial class UpdateToPasswordHas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
