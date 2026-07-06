@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
-    "\\Data"
+    "\\Data",
+    "\\Logs",
+    "\\Models",
+    "\\Views"
   ],
-  "SelectedNode": "\\Data\\AppDbContext.cs",
+  "SelectedNode": "\\SEGG-U1-P2F.pdf",
   "PreviewInSolutionExplorer": false
 }
