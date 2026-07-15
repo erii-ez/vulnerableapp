@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VulnerableApp.Data;
 using Serilog;
+using VulnerableApp.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<GlobalLoggingMiddleware>();
 
 
 app.UseSession();

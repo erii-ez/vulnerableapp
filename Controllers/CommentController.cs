@@ -26,7 +26,6 @@ namespace VulnerableApp.Controllers
 
             try
             {
-
                 return View(_comments);
             }
             catch (Exception ex)

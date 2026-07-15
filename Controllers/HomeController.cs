@@ -25,6 +25,7 @@ namespace VulnerableApp.Controllers
 
             try
             {
+                throw new Exception("Error Controlado");
                 return View();
             }
             catch (Exception ex)

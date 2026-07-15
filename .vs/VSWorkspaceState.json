@@ -1,12 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
-    "\\Data",
-    "\\Logs",
-    "\\Models",
-    "\\Views"
+    "\\Properties"
   ],
-  "SelectedNode": "\\SEGG-U1-P2F.pdf",
+  "SelectedNode": "\\promtail-config.yaml",
   "PreviewInSolutionExplorer": false
 }

@@ -45,7 +45,6 @@ namespace VulnerableApp.Controllers
 
                 stopwatch.Stop();
                 _logger.LogInformation("Fin Search.Index. Tiempo de ejecución: {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
-
                 return View(users);
             }
             catch (Exception ex)
