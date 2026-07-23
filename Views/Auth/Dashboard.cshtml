@@ -1,5 +1,5 @@
-@model VulnerableApp.Models.User
+@model dynamic
 <h2>Dashboard</h2>
-<p>Usuario: @Model.Username</p>
-<p>Email: @Model.Email</p>
-<p>Balance: @Model.Balance</p>
+<p>Usuario: @Model?.Username</p>
+<p>Email: @Model?.Email</p>
+<p>Balance: @Model?.Balance</p>

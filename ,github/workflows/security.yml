@@ -1,0 +1,35 @@
+name: Security Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Permite ejecutar el pipeline manualmente desde GitHub
+
+jobs:
+  dast-zap:
+    name: DAST OWASP ZAP
+    runs-on: ubuntu-latest
+    # needs: sonarqube (Comentado porque es tu primer job en este archivo)
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build and run app in background
+        run: |
+          dotnet build VulnerableApp/
+          dotnet run --project VulnerableApp/ &
+          sleep 10 # Esperar que la app arranque
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'http://localhost:5000'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-I'
+      - name: Upload ZAP report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-baseline-report
+          path: report_html.html
+        if: always()

@@ -12,8 +12,8 @@ using VulnerableApp.Data;
 namespace VulnerableApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260602181523_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260703054746_InicialLimpia")]
+    partial class InicialLimpia
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace VulnerableApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VulnerableApp.Models.User", b =>
+            modelBuilder.Entity("User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace VulnerableApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -60,27 +60,27 @@ namespace VulnerableApp.Migrations
                         {
                             Id = 1,
                             Balance = 1000m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@test.com",
-                            Password = "admin",
+                            PasswordHash = "$2b$12$4ViAVOygLkUqH7zS88Va8eqnYT8SNNSLUWsUEtDiqtpAVY0anO9Aq",
                             Username = "admin"
                         },
                         new
                         {
                             Id = 2,
                             Balance = 500m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@test.com",
-                            Password = "123456",
+                            PasswordHash = "$2b$12$8kUykxelX5lI8iQ/DP1oTeuK/1sWesogHN.TVZR.hETNNDUslBVTW",
                             Username = "user1"
                         },
                         new
                         {
                             Id = 3,
                             Balance = 750m,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user2@test.com",
-                            Password = "password",
+                            PasswordHash = "$$2b$12$fDaWV7Cx6ON8GPx4Pdb8Q.tzCVtu/xxl4j7RHQF20HLviyeGL/V26",
                             Username = "user2"
                         });
                 });

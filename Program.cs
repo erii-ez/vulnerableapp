@@ -1,18 +1,28 @@
 using Microsoft.EntityFrameworkCore;
-using VulnerableApp.Data; // Importante: Asegúrate de incluir el namespace donde creaste tu AppDbContext
+using VulnerableApp.Data;
+using Serilog;
+using VulnerableApp.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Seq("http://localhost:5341")
+    .Enrich.FromLogContext()
+    .Enrich.WithMachineName()
+    .CreateLogger();
+
+builder.Host.UseSerilog();  
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// --- FIN DE ACTIVIDAD 5 ---
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -20,6 +30,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<GlobalLoggingMiddleware>();
 
 
 app.UseSession();

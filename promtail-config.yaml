@@ -1,0 +1,41 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions4.yaml 
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: vulnerableapp_logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: vulnerableapp
+          env: general
+          _path_: /var/log/applogs/*.txt
+    
+pipeline_stages:
+      # 1. Filtro para los logs de Seguridad
+      # Captura las advertencias de "Acceso no autorizado"
+      - regex:
+          expression: '(?P<Security>Acceso no autorizado)'
+      - labels:
+          Security:
+
+      # 2. Filtro para los logs de Aplicación (Errores)
+      # Captura los eventos "Unhandled Exception", "Error crítico" y "Error en"
+      - regex:
+          expression: '(?P<Application>Unhandled Exception|Error crítico|Error en)'
+      - labels:
+          Application:
+
+      # 3. Filtro para los logs de Auditoría / Información
+      # Captura el tráfico, la ejecución de endpoints y las peticiones HTTP
+      - regex:
+          expression: '(?P<Audit>Inicio|Fin|Request starting|Request finished|Executed|HTTP GET)'
+      - labels:
+          Audit:
